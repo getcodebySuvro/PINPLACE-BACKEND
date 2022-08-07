@@ -2,11 +2,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const pinRoute = require("./Routes/pins")
+const cors = require("cors")
 const userRoute = require("./Routes/users")
-const port = process.env.PORT || 8800
+const port = process.env.PORT
 
 dotenv.config();
 const app = express();
+app.use(cors());
 app.use(express.json({limit:'50mb'}));
 
 
@@ -19,7 +21,10 @@ mongoose.connect(process.env.DB_URL,{
 }).catch((err)=>{
     console.log(err)
 })
+app.get("/",(req,res)=>{
+    res.send("Pinplace is running")
 
+})
 app.use("/api/pins",pinRoute)
 app.use("/api/users",userRoute)
 
