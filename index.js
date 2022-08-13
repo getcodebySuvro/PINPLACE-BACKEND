@@ -13,7 +13,7 @@ app.use(express.json({limit:'50mb'}));
 
 
 //Mongoose Connection
-mongoose.connect("mongodb+srv://pinplace:pinplace50@cluster0.iryrr.mongodb.net/pindb?retryWrites=true&w=majority",{
+mongoose.connect(process.env.DB_URL,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
 }).then(()=>{
